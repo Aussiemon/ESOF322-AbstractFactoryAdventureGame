@@ -1,0 +1,70 @@
+ESOF322 Assignment 2
+overview.txt
+
+
+Team Members:
+Andrew Jenkins
+Stephanie McLaren
+David Schwehr
+Kay Spokas
+Matt Rohrlach
+
+
+Changes:
+Set up methods to link the GUI with player movement, inventory management,
+and player status.
+
+Added additional text box area to show character status ("Ouch, my face!", etc.).
+Enabled character status to reset when each room is entered.
+
+Adjusted button locations to make room for new text output area.
+Added method to create rooms, player, key, and treasures.
+
+Trouble Spots:
+We had some trouble sorting through the code to see where certain methods
+were being called, and adapting those methods to suit our needs.
+Figuring out the layout of the classes was challenging.
+
+Design Approaches:
+Group meeting to discuss design.
+Since we were having trouble interpreting the code, we took a half hour to
+simply read each class and figure out how the program worked. Then we discussed
+what changes we needed to make.
+
+We tested our code very often to see if it ran properly. We also would stop to
+consider the UML diagram and discuss how to continue.
+
+We divided up the writing of the methods, UML diagram construction,
+GUI implementation, and overview file between group members, so everyone could
+be working on part of the project.
+
+Collaborated on updating and implementing the code.
+
+
+Special Instructions for Running Program:
+
+Please note that the player must choose which interface they wish to use.
+Once a game has been started with either the command terminal or GUI, they must
+use the same interface throughout.
+
+
+Time Spent by Each Team Member:
+
+Andrew Jenkins - 5 hours
+Stephanie McLaren – 4 hours
+David Schwehr - 5 hours
+Kay Spokas - 6 hours
+Matt Rohrlach - 4 hours
+
+
+GitHub Repository Transcript:
+
+The push and pulls from the repository are not useful in determining a group
+member's contribution within this particular team. Given the complexity of the
+instructor-provided code, we decided to meet for several hours to figure out
+what needed to be done, and work on the code (and related documentation)
+together. Once the meeting was concluded, we uploaded results from only one
+user's profile. In short, the work done by each member is not reflected in the 
+transcript.
+
+  

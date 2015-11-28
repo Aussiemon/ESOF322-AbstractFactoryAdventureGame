@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Wall.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ESOF322_AssignmentP3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">esof322.a3</a> &gt; <span class="el_source">Wall.java</span></div><h1>Wall.java</h1><pre class="source lang-java linenums">/**
+ * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
+ * Kay Spokas, Matt Rohrlach 
+ */
+
+/**@SummaryOfChanges
+ *  Edited output for when player walks into wall
+ *  Added method call to set player status when player walks into wall
+ */
+
+
+
+
+package esof322.a3;
+
+/**
+ * Adventure Game Program Code Copyright (c) 1999 James M. Bieman
+ *
+ * To compile: javac AdventureGame.java To run: java AdventureGame
+ *
+ * The main routine is AdventureGame.main
+ *
+ *
+ */
+<span class="fc" id="L25">public class Wall implements CaveSite {</span>
+<span class="fc" id="L26">    String description = &quot;Ow! My face.&quot;;</span>
+    
+    public void enter(Player p) {
+<span class="fc" id="L29">        p.setCurrentStatus(description);</span>
+<span class="fc" id="L30">        System.out.println(&quot;Ouch! That hurts.\n&quot;);</span>
+<span class="fc" id="L31">    }   </span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

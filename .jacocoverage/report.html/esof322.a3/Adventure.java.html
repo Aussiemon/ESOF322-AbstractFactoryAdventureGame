@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Adventure.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ESOF322_AssignmentP3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">esof322.a3</a> &gt; <span class="el_source">Adventure.java</span></div><h1>Adventure.java</h1><pre class="source lang-java linenums">/**
+ * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
+ * Kay Spokas, Matt Rohrlach
+ * 
+ * @SummaryOfChanges
+ *  Changed room descriptions to match AdventureGameModelFacade
+ */
+
+
+
+package esof322.a3;
+
+
+/**  Adventure Game  Program Code
+     Copyright (c) 1999 James M. Bieman
+
+     To compile: javac AdventureGame.java
+     To run:     java AdventureGame
+
+     The main routine is AdventureGame.main
+                
+**/
+
+/**  Adventure Game  Program Code
+Copyright (c) 1999-2012 James M. Bieman
+The Adventure game is based on the &quot;Colossal Cave Adventure&quot; originally
+designed by Will Crowther and implemented by Will Crowther
+and Don Wood in Fortran in 1975 and 1976.
+
+This micro-version is a variant of the original cave system and is implemented in Java
+with just a few rooms and with a much more limited vocabulary.
+
+Updated August 2010, January 2012
+- Code is put into package cs314.a2 to match current CS314 coding standards.
+Updated January 2012
+- Renamed as the &quot;Adventure Game&quot;
+
+To compile: javac cs314.a2.AdventureGame.java
+To run:     java cs314.a2.AdventureGame
+
+The main routine is AdventureGame.main
+			    
+			    **/
+
+/** class Adventure: Primary method, createCave, creates the cave system.
+        It eventually be replaced with a more flexible mechanism
+        to support input and output from devices other than
+        an ASCII terminal.
+
+		Room descriptions are followed by a room identifier,
+		to ease debugging and testing.  These would be removed
+		to help confuse the user, which is our ultimate aim.
+
+		I haven't added all of the room descriptions.  They
+		will be done later.
+		
+		In this version all I/O is through standard I/O;
+		I/O is to and from the console. 
+
+*/
+
+<span class="nc" id="L62">public class Adventure {</span>
+
+  private Room entrance;
+  
+  public Room createAdventure(){
+    // The outside: 
+<span class="nc" id="L68">        Room outside = new Room();</span>
+<span class="nc" id="L69">        outside.setDesc(</span>
+                &quot;You are standing at the edge of a desert cave. The stars\n&quot;
+                + &quot;illuminate the sands around you but shed no light\n&quot;
+                + &quot;past the mouth of the abyss at your feet. Something \n&quot;
+                + &quot;compells you to descend, and will smack your face\n&quot;
+                + &quot;if you do not. (outside).&quot;);
+
+        // Room 1:
+<span class="nc" id="L77">        Room r1 = new Room();</span>
+<span class="nc" id="L78">        r1.setDesc(</span>
+                &quot;The cave exit shines brightly above you, but all else is\n&quot;
+                + &quot; dark, and you are glad to have your torch. It reveals a narrow,\n&quot;
+                + &quot;dank passage to the east (r1).&quot;);
+
+        // Connect the outside to Room 1:
+<span class="nc" id="L84">        outside.setSide(5, r1);</span>
+<span class="nc" id="L85">        r1.setSide(4, outside);</span>
+<span class="nc" id="L86">        entrance = outside;</span>
+
+        // Room 2:
+<span class="nc" id="L89">        Room r2 = new Room();</span>
+<span class="nc" id="L90">        r2.setDesc(</span>
+                &quot;The entire room is flooded. You wade into the chest-high\n&quot;
+                + &quot;water and see a dim light to the west; however, you see\n&quot;
+                + &quot;a dark hole to the east only about 18 inches high (r2).&quot;);
+
+        // Room 3:
+<span class="nc" id="L96">        Room r3 = new Room();</span>
+<span class="nc" id="L97">        r3.setDesc(&quot;The room is wide, and huge rocks block your path.\n&quot;</span>
+                + &quot;However, you expertly scale the rubble and find yourself\n&quot;
+                + &quot;at the room's center. There is a rubble-filled corridor\n&quot;
+                + &quot;to the west, another to the east, and a deep hole\n&quot;
+                + &quot;that is completely flooded in the middle of the room (r3).&quot;);
+
+        // Connect Rooms 1, 2, &amp; 3:
+<span class="nc" id="L104">        r1.setSide(2, r2);</span>
+<span class="nc" id="L105">        r2.setSide(3, r1);</span>
+<span class="nc" id="L106">        r2.setSide(2, r3);</span>
+<span class="nc" id="L107">        r3.setSide(3, r2);</span>
+
+        // Room 4:
+<span class="nc" id="L110">        Room r4 = new Room();</span>
+<span class="nc" id="L111">        r4.setDesc(&quot;There are passages leading west and north. The sound of\n&quot;</span>
+                + &quot; dripping water echoes from a downward-slopping path.&quot;);
+
+<span class="nc" id="L114">        Treasure timmyTheRat = new Treasure();</span>
+<span class="nc" id="L115">        timmyTheRat.setDesc(&quot;An inexplicably adorable, yet lonely, rat. You named&quot;</span>
+                + &quot; him Timmy.&quot;);
+<span class="nc" id="L117">        r4.addItem(timmyTheRat);</span>
+
+        // Room 5:
+<span class="nc" id="L120">        Room r5 = new Room();</span>
+<span class="nc" id="L121">        r5.setDesc(&quot;You hold your breath as you negotiate pitch black water,\n&quot;</span>
+                + &quot;having left your torch in the room above. You feel a\n&quot;
+                + &quot;current pulling you to the east (r5).&quot;);
+
+        // Room 6:
+<span class="nc" id="L126">        Room r6 = new Room();</span>
+<span class="nc" id="L127">        r6.setDesc(&quot;As your hands fumble in the darkness, an eel swims\n&quot;</span>
+                + &quot;past your face, and your lungs tighten as you hold in\n&quot;
+                + &quot;a scream. The space is tiny, you can only go west\n&quot;
+                + &quot;without smacking your face (r7).&quot;);
+
+        // Room 7:
+<span class="nc" id="L133">        Room r7 = new Room();</span>
+<span class="nc" id="L134">        r7.setDesc(&quot;This room has nothing to offer. You got your clothes\n&quot;</span>
+                + &quot;soggy again for nothing(r7).\n&quot;);
+
+        // Connect rooms 3, 4, 5, 6, &amp; 7.
+<span class="nc" id="L138">        r3.setSide(2, r4);</span>
+<span class="nc" id="L139">        r3.setSide(5, r5);</span>
+<span class="nc" id="L140">        r4.setSide(3, r3);</span>
+<span class="nc" id="L141">        r4.setSide(5, r7);</span>
+<span class="nc" id="L142">        r5.setSide(4, r3);</span>
+<span class="nc" id="L143">        r5.setSide(2, r6);</span>
+<span class="nc" id="L144">        r6.setSide(3, r5);</span>
+<span class="nc" id="L145">        r7.setSide(4, r4);</span>
+
+        // Room 8:
+<span class="nc" id="L148">        Room r8 = new Room();</span>
+<span class="nc" id="L149">        r8.setDesc(&quot;A bat flies past, but you like bats, so you are\n&quot;</span>
+                + &quot;completely fine with that. A narrow passage runs to the\n&quot;
+                + &quot;east, and a very, very creepy crawl space runs to the\n&quot;
+                + &quot;west. Your keen nose tells you that the cave entrance is\n&quot;
+                + &quot;toward the south (r8).&quot;);
+
+        // Room 9:
+<span class="nc" id="L156">        Room r9 = new Room();</span>
+<span class="nc" id="L157">        r9.setDesc(&quot;This room is entirely uninteresting and devoid of anything&quot;</span>
+                + &quot; useful. There is an opening to the east. (r9).&quot;);
+
+        // Room 10:
+<span class="nc" id="L161">        Room r10 = new Room();</span>
+<span class="nc" id="L162">        r10.setDesc(&quot;It looks like someone has been here.\n&quot;</span>
+                + &quot;There is a pile of Baby Ruth candy wrappers on the floor;\n&quot;
+                + &quot;at least they have good taste. Wait! There is something\n&quot;
+                + &quot;else? A trap door creaks under your feet,\n&quot;
+                + &quot; there is a large keyhole in the door(r10).&quot;);
+
+        // Room 11:
+<span class="nc" id="L169">        Room r11 = new Room();</span>
+<span class="nc" id="L170">        r11.setDesc(&quot;This room is very dark. You can just barely see (r11).&quot;);</span>
+<span class="nc" id="L171">        Treasure theTreasure = new Treasure();</span>
+<span class="nc" id="L172">        theTreasure.setDesc(&quot;A bag filled with gold bars.&quot;);</span>
+<span class="nc" id="L173">        r11.addItem(theTreasure);</span>
+
+        // Lets connect them:
+<span class="nc" id="L176">        r4.setSide(0, r8);</span>
+<span class="nc" id="L177">        r8.setSide(1, r4);</span>
+<span class="nc" id="L178">        r8.setSide(3, r9);</span>
+<span class="nc" id="L179">        r8.setSide(2, r10);</span>
+<span class="nc" id="L180">        r9.setSide(2, r8);</span>
+<span class="nc" id="L181">        r10.setSide(3, r8);</span>
+
+        // Create a key and put it in r6:
+<span class="nc" id="L184">        Key theKey = new Key();</span>
+<span class="nc" id="L185">        theKey.setDesc(&quot;A shiny gold key.&quot;);</span>
+<span class="nc" id="L186">        r6.addItem(theKey);</span>
+
+        // We add a door between r10 and r11: 
+<span class="nc" id="L189">        Door theDoor = new Door(r10, r11, theKey);</span>
+<span class="nc" id="L190">        r10.setSide(5, theDoor);</span>
+<span class="nc" id="L191">        r11.setSide(4, theDoor);</span>
+
+        // Now return the entrance:
+<span class="nc" id="L194">        entrance = outside;</span>
+<span class="nc" id="L195">        return entrance;</span>
+
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

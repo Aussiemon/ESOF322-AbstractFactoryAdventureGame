@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdventureGameModelFacade.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ESOF322_AssignmentP3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">esof322.a3</a> &gt; <span class="el_source">AdventureGameModelFacade.java</span></div><h1>AdventureGameModelFacade.java</h1><pre class="source lang-java linenums">/**
+ * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
+ * Kay Spokas, Matt Rohrlach
+ */
+
+/**
+ * @SummaryOfChanges
+ *  Added createAdventure method to build cave rooms, key, treasure(gold),
+ *      and treasure (Timmy the rat)
+ *  Created player object, and called createAdventure in
+ *      AdventureGameModelFacade()
+ *  Connected movement methods to GUI
+ *  Finished getView and getItems methods and connected them to GUI
+ *  Added several methods to account for player status, number of items carried,
+ *      adding items, removing items, and determining the room that is currently
+ *      being visited. See lines (203-277) for more information
+ */
+package esof322.a3;
+
+public class AdventureGameModelFacade {
+
+    // some private fields to reference current location,
+    // its description, what I'm carrying, etc.
+    //
+    // These methods and fields are left as exercises.
+    private Room entrance;
+    private Player thePlayer;
+
+    public Room createAdventure() {
+        // The outside: 
+<span class="nc" id="L31">        Room outside = new Room();</span>
+<span class="nc" id="L32">        outside.setDesc(</span>
+                &quot;You are standing at the edge of a desert cave. The stars\n&quot;
+                + &quot;illuminate the sands around you but shed no light\n&quot;
+                + &quot;past the mouth of the abyss at your feet. Something \n&quot;
+                + &quot;compells you to descend, and will smack your face\n&quot;
+                + &quot;if you do not. (outside).&quot;);
+
+        // Room 1:
+<span class="nc" id="L40">        Room r1 = new Room();</span>
+<span class="nc" id="L41">        r1.setDesc(</span>
+                &quot;The cave exit shines brightly above you, but all else is\n&quot;
+                + &quot; dark, and you are glad to have your torch. It reveals a narrow,\n&quot;
+                + &quot;dank passage to the east (r1).&quot;);
+
+        // Connect the outside to Room 1:
+<span class="nc" id="L47">        outside.setSide(5, r1);</span>
+<span class="nc" id="L48">        r1.setSide(4, outside);</span>
+<span class="nc" id="L49">        entrance = outside;</span>
+
+        // Room 2:
+<span class="nc" id="L52">        Room r2 = new Room();</span>
+<span class="nc" id="L53">        r2.setDesc(</span>
+                &quot;The entire room is flooded. You wade into the chest-high\n&quot;
+                + &quot;water and see a dim light to the west; however, you see\n&quot;
+                + &quot;a dark hole to the east only about 18 inches high (r2).&quot;);
+
+        // Room 3:
+<span class="nc" id="L59">        Room r3 = new Room();</span>
+<span class="nc" id="L60">        r3.setDesc(&quot;The room is wide, and huge rocks block your path.\n&quot;</span>
+                + &quot;However, you expertly scale the rubble and find yourself\n&quot;
+                + &quot;at the room's center. There is a rubble-filled corridor\n&quot;
+                + &quot;to the west, another to the east, and a deep hole\n&quot;
+                + &quot;that is completely flooded in the middle of the room (r3).&quot;);
+
+        // Connect Rooms 1, 2, &amp; 3:
+<span class="nc" id="L67">        r1.setSide(2, r2);</span>
+<span class="nc" id="L68">        r2.setSide(3, r1);</span>
+<span class="nc" id="L69">        r2.setSide(2, r3);</span>
+<span class="nc" id="L70">        r3.setSide(3, r2);</span>
+
+        // Room 4:
+<span class="nc" id="L73">        Room r4 = new Room();</span>
+<span class="nc" id="L74">        r4.setDesc(&quot;There are passages leading west and north. The sound of\n&quot;</span>
+                + &quot; dripping water echoes from a downward-slopping path (r4).&quot;);
+
+<span class="nc" id="L77">        Treasure timmyTheRat = new Treasure();</span>
+<span class="nc" id="L78">        timmyTheRat.setDesc(&quot;An inexplicably adorable, yet lonely, rat. You named&quot;</span>
+                + &quot; him Timmy.&quot;);
+<span class="nc" id="L80">        r4.addItem(timmyTheRat);</span>
+
+        // Room 5:
+<span class="nc" id="L83">        Room r5 = new Room();</span>
+<span class="nc" id="L84">        r5.setDesc(&quot;You hold your breath as you negotiate pitch black water,\n&quot;</span>
+                + &quot;having left your torch in the room above. You feel a\n&quot;
+                + &quot;current pulling you to the east (r5).&quot;);
+
+        // Room 6:
+<span class="nc" id="L89">        Room r6 = new Room();</span>
+<span class="nc" id="L90">        r6.setDesc(&quot;As your hands fumble in the darkness, an eel swims\n&quot;</span>
+                + &quot;past your face, and your lungs tighten as you hold in\n&quot;
+                + &quot;a scream. The space is tiny, you can only go west\n&quot;
+                + &quot;without smacking your face (r6).&quot;);
+
+        // Room 7:
+<span class="nc" id="L96">        Room r7 = new Room();</span>
+<span class="nc" id="L97">        r7.setDesc(&quot;This room has nothing to offer. You got your clothes\n&quot;</span>
+                + &quot;soggy again for nothing (r7).\n&quot;);
+
+        // Connect rooms 3, 4, 5, 6, &amp; 7.
+<span class="nc" id="L101">        r3.setSide(2, r4);</span>
+<span class="nc" id="L102">        r3.setSide(5, r5);</span>
+<span class="nc" id="L103">        r4.setSide(3, r3);</span>
+<span class="nc" id="L104">        r4.setSide(5, r7);</span>
+<span class="nc" id="L105">        r5.setSide(4, r3);</span>
+<span class="nc" id="L106">        r5.setSide(2, r6);</span>
+<span class="nc" id="L107">        r6.setSide(3, r5);</span>
+<span class="nc" id="L108">        r7.setSide(4, r4);</span>
+
+        // Room 8:
+<span class="nc" id="L111">        Room r8 = new Room();</span>
+<span class="nc" id="L112">        r8.setDesc(&quot;A bat flies past, but you like bats, so you are\n&quot;</span>
+                + &quot;completely fine with that. A narrow passage runs to the\n&quot;
+                + &quot;east, and a very, very creepy crawl space runs to the\n&quot;
+                + &quot;west. Your keen nose tells you that the cave entrance is\n&quot;
+                + &quot;toward the south (r8).&quot;);
+
+        // Room 9:
+<span class="nc" id="L119">        Room r9 = new Room();</span>
+<span class="nc" id="L120">        r9.setDesc(&quot;This room is entirely uninteresting and devoid of anything&quot;</span>
+                + &quot; useful. There is an opening to the east (r9).&quot;);
+
+        // Room 10:
+<span class="nc" id="L124">        Room r10 = new Room();</span>
+<span class="nc" id="L125">        r10.setDesc(&quot;It looks like someone has been here.\n&quot;</span>
+                + &quot;There is a pile of Baby Ruth candy wrappers on the floor;\n&quot;
+                + &quot;at least they have good taste. Wait! There is something\n&quot;
+                + &quot;else? A trap door creaks under your feet,\n&quot;
+                + &quot; there is a large keyhole in the door (r10).&quot;);
+
+        // Room 11:
+<span class="nc" id="L132">        Room r11 = new Room();</span>
+<span class="nc" id="L133">        r11.setDesc(&quot;This room is very dark. You can just barely see (r11).&quot;);</span>
+<span class="nc" id="L134">        Treasure theTreasure = new Treasure();</span>
+<span class="nc" id="L135">        theTreasure.setDesc(&quot;A bag filled with gold bars.&quot;);</span>
+<span class="nc" id="L136">        r11.addItem(theTreasure);</span>
+
+        // Lets connect them:
+<span class="nc" id="L139">        r4.setSide(0, r8);</span>
+<span class="nc" id="L140">        r8.setSide(1, r4);</span>
+<span class="nc" id="L141">        r8.setSide(3, r9);</span>
+<span class="nc" id="L142">        r8.setSide(2, r10);</span>
+<span class="nc" id="L143">        r9.setSide(2, r8);</span>
+<span class="nc" id="L144">        r10.setSide(3, r8);</span>
+
+        // Create a key and put it in r6:
+<span class="nc" id="L147">        Key theKey = new Key();</span>
+<span class="nc" id="L148">        theKey.setDesc(&quot;A shiny gold key.&quot;);</span>
+<span class="nc" id="L149">        r6.addItem(theKey);</span>
+
+        // We add a door between r10 and r11: 
+<span class="nc" id="L152">        Door theDoor = new Door(r10, r11, theKey);</span>
+<span class="nc" id="L153">        r10.setSide(5, theDoor);</span>
+<span class="nc" id="L154">        r11.setSide(4, theDoor);</span>
+
+        // Now return the entrance:
+<span class="nc" id="L157">        entrance = outside;</span>
+<span class="nc" id="L158">        return entrance;</span>
+
+    }
+
+<span class="nc" id="L162">    AdventureGameModelFacade() { // we initialize</span>
+<span class="nc" id="L163">        thePlayer = new Player();</span>
+<span class="nc" id="L164">        Room startRm = createAdventure();</span>
+<span class="nc" id="L165">        thePlayer.setRoom(startRm);</span>
+<span class="nc" id="L166">    }</span>
+    
+    //Linked GUI to movement methods
+    public void goUp() {
+<span class="nc" id="L170">        thePlayer.go(4);</span>
+<span class="nc" id="L171">    }</span>
+
+    public void goDown() {
+<span class="nc" id="L174">        thePlayer.go(5);</span>
+<span class="nc" id="L175">    }</span>
+
+    public void goNorth() {
+<span class="nc" id="L178">        thePlayer.go(0);</span>
+<span class="nc" id="L179">    }</span>
+
+    public void goSouth() {
+<span class="nc" id="L182">        thePlayer.go(1);</span>
+<span class="nc" id="L183">    }</span>
+
+    public void goEast() {
+<span class="nc" id="L186">        thePlayer.go(2);</span>
+<span class="nc" id="L187">    }</span>
+
+    public void goWest() {
+<span class="nc" id="L190">        thePlayer.go(3);</span>
+<span class="nc" id="L191">    }</span>
+
+    // You need to finish these getView and getItems methods.
+    public String getView() {
+<span class="nc" id="L195">        return thePlayer.look();</span>
+    }
+
+    public String getItems() {
+<span class="nc" id="L199">        return thePlayer.showMyThings();</span>
+    }
+
+    /**
+     * Gets the current number of items the player is holding.
+     *
+     * @return Number of items held
+     */
+    public int getNumberOfPlayerItems() {
+<span class="nc" id="L208">        return thePlayer.numItemsCarried();</span>
+    }
+
+    /**
+     * Gets the list of items held by the player
+     *
+     * @return Item list
+     */
+    public Item[] getListOfPlayerItems() {
+<span class="nc" id="L217">        return thePlayer.getPlayerItemList();</span>
+    }
+
+    /**
+     * Get the current status of the player
+     *
+     * @return Current Status
+     */
+    public String getStatus() {
+<span class="nc" id="L226">        return thePlayer.currentStatus();</span>
+    }
+
+    /**
+     * Update the player's current status
+     *
+     * @param status Status to update with
+     */
+    public void setPlayerStatus(String status) {
+<span class="nc" id="L235">        thePlayer.setCurrentStatus(status);</span>
+<span class="nc" id="L236">    }</span>
+
+    /**
+     * Gives an item to the player
+     *
+     * @param item Item to give to the player
+     */
+    public void giveItemToPlayer(Item item) {
+<span class="nc" id="L244">        thePlayer.pickUp(item);</span>
+<span class="nc" id="L245">    }</span>
+
+    /**
+     * Drops an item from the player
+     *
+     * @param int Item to drop
+     */
+    public void dropItemFromPlayer(int item) {
+<span class="nc" id="L253">        thePlayer.drop(item);</span>
+<span class="nc" id="L254">    }</span>
+
+    /**
+     * Checks to see if the player has the item
+     *
+     * @return Whether the player has the item
+     */
+    public boolean checkIfPlayerHasItem(Item item) {
+<span class="nc" id="L262">        return thePlayer.haveItem(item);</span>
+    }
+
+    /**
+     * Gets the current room player is in.
+     *
+     * @return Current room
+     */
+    public Room getCurrentRoom() {
+<span class="nc" id="L271">        return thePlayer.getLoc();</span>
+    }
+
+ // Surely you will need other methods to deal with
+    // picking up and dropping things.
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
