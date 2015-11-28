@@ -1,7 +1,7 @@
 /*
  * Test class for Room.java of ESOF322-AssignmentP2
  */
-package esof322.a3;
+package esof322.a4;
 
 import esof322.a4.Room;
 import esof322.a4.Key;

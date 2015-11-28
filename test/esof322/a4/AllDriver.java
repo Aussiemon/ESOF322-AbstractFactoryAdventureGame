@@ -1,4 +1,4 @@
-package esof322.a3;
+package esof322.a4;
 
 /*
  * Driver of all test classes in Assignment 3
@@ -17,9 +17,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    esof322.a3.Level0DoorTest.class,
-    esof322.a3.PlayerTest.class,
-    esof322.a3.RoomTest.class
+    esof322.a4.Level0DoorTest.class,
+    esof322.a4.PlayerTest.class,
+    esof322.a4.RoomTest.class
 })
 public class AllDriver {
 

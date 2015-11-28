@@ -1,7 +1,7 @@
 /*
  * Test class for Door.java of ESOF322-AssignmentP2
  */
-package esof322.a3;
+package esof322.a4;
 
 import esof322.a4.Level0Door;
 import esof322.a4.Room;
@@ -19,13 +19,13 @@ import static org.junit.Assert.*;
  * @author Matthew Rohrlach
  * @date 10/26/15
  */
-public class Level0DoorTest {
-    Level0Door dTest;
+public class Level1DoorTest {
+    Level1Door dTest;
     Player pTest;
     Room rTestOut, rTestIn, rTest;
     Key kTest;
     
-    public Level0DoorTest() {
+    public Level1DoorTest() {
     }
     
     @BeforeClass
@@ -45,7 +45,7 @@ public class Level0DoorTest {
         
         kTest = new Key();
         
-        dTest = new Level0Door(rTestOut, rTestIn, kTest);
+        dTest = new Level1Door(rTestOut, rTestIn, kTest);
         
         pTest = new Player();
     }
