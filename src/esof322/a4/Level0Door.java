@@ -1,12 +1,10 @@
 /**
- * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
- * Kay Spokas, Matt Rohrlach 
+ * @author Matt Rohrlach 
  */
 
 /**
  * @SummaryOfChanges
- * Changed information output about the key/door from a println to a player
- *      status
+ * 
  */
 
 
@@ -25,7 +23,7 @@ package esof322.a4;
 
 // class Level0Door
 
-public class Level0Door implements CaveSite {
+public class Level0Door extends Door{
   /** In this implementation doors are always locked.
       A player must have the correct key to get through
       a door.  Doors automatically lock after a player
@@ -43,24 +41,5 @@ public class Level0Door implements CaveSite {
     inSite = in;
     myKey = k;
   }
-
- /** A player will need the correct key to enter. */
- public void enter(Player p){
- if (p.haveItem(myKey)) {
-    System.out.println("Your key works! The door creaks open,");
-    System.out.println("and slams behind you after you pass through.");
-    if (p.getLoc() == outSite) inSite.enter(p);
-    else if (p.getLoc() == inSite) outSite.enter(p); 
-    
-    p.setCurrentStatus("Your key works! The door creaks open,\n"
-            + "and slams behind you after you pass through.");
- }
- else {
-    p.setCurrentStatus("You don't have the key for this door!\nSorry.");
-    System.out.println("You don't have the key for this door!");
-    System.out.println("Sorry.");
-      }
- }
-
 }
 

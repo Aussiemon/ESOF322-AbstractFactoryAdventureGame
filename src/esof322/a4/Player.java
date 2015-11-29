@@ -9,6 +9,8 @@
  */
 package esof322.a4;
 
+import java.io.Serializable;
+
 /**
  * Adventure Game Program Code Copyright (c) 1999 James M. Bieman
  *
@@ -18,7 +20,7 @@ package esof322.a4;
  *
  *
  */
-public class Player {
+public class Player implements Serializable{
 
     private Room myLoc;
 
@@ -50,7 +52,7 @@ public class Player {
 
     public boolean haveItem(Item itemToFind) {
         for (int n = 0; n < itemCount; n++) {
-            if (myThings[n] == itemToFind) {
+            if (myThings[n].equals(itemToFind)) {
                 return true;
             }
         }

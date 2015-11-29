@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    esof322.a4.Level0DoorTest.class,
+    esof322.a4.DoorTest.class,
     esof322.a4.PlayerTest.class,
     esof322.a4.RoomTest.class
 })

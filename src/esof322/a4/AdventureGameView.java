@@ -17,7 +17,14 @@ package esof322.a4;
 import javax.swing.*;
 
 import BreezySwing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AdventureGameView extends GBFrame {
 
@@ -44,7 +51,13 @@ public class AdventureGameView extends GBFrame {
     JTextArea statusArea = addTextArea("Nothing", 11, 1, 4, 3);
 
     JLabel choiceLabel = addLabel("Choose a direction, pick-up, or drop an item", 15, 1, 5, 1);
+    
+    JButton restartButton = addButton("Restart", 2, 5, 1, 1);
+    
+    JButton saveButton = addButton("Save Game", 7, 5, 1, 1);
+    JButton loadButton = addButton("Load Game", 8, 5, 1, 1);
 
+    JButton difficultyButton = addButton("Choose Difficulty", 15, 5, 1, 1);
     JButton grabButton = addButton("Grab an item", 16, 5, 1, 1);
     JButton dropButton = addButton("Drop an item", 17, 5, 1, 1);
 
@@ -55,15 +68,27 @@ public class AdventureGameView extends GBFrame {
     JButton upButton = addButton("Up", 15, 2, 1, 1);
     JButton downButton = addButton("Down", 18, 2, 1, 1);
 
-    AdventureGameModelFacade model;
+    AdventureGameModelAbstractFactory model;
+    int difficulty = Integer.parseInt((String) JOptionPane.showInputDialog(
+                null,
+                "Choose an initial difficulty:",
+                "Customized Dialog",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new String[]{"0", "1"},
+                "0"));
+    
+    
 
     // Constructor-----------------------------------------------
     public AdventureGameView() {
         setTitle("Adventure Game");
-        model = new AdventureGameModelFacade();
+        model = new AdventureGameModelAbstractFactory(difficulty);
         viewArea.setEditable(false);
         carryingArea.setEditable(false);
         displayCurrentInfo();
+        
+        System.out.println(System.getProperty("user.dir"));
     }
 
     // buttonClicked method--------------------------------------
@@ -82,8 +107,25 @@ public class AdventureGameView extends GBFrame {
             model.goEast();
         } else if (buttonObj == westButton) {
             model.goWest();
-
-        } else if (buttonObj == grabButton) {
+        } else if (buttonObj == saveButton) {
+            saveGame();
+        } else if (buttonObj == loadButton) {
+            loadGame();
+        } else if (buttonObj == difficultyButton) {
+            difficulty = Integer.parseInt((String) JOptionPane.showInputDialog(
+                null,
+                "Choose a difficulty:",
+                "Customized Dialog",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                new String[]{"0", "1"},
+                "0"));
+                
+                model.setPlayerStatus("Difficulty set to " + difficulty + ".");
+        } else if (buttonObj == restartButton){
+            model = new AdventureGameModelAbstractFactory(difficulty);
+            displayCurrentInfo();
+        }  else if (buttonObj == grabButton) {
             grab();
         } else if (buttonObj == dropButton) {
             drop();
@@ -135,7 +177,7 @@ public class AdventureGameView extends GBFrame {
     private void drop() {
         String s = (String) JOptionPane.showInputDialog(
                 null,
-                "Drop item 1 or item 2?\nView carrying items status for a"
+                "Drop item 1 or item 2?\nView carrying items status for a "
                 + "list of current items held",
                 "Customized Dialog",
                 JOptionPane.PLAIN_MESSAGE,
@@ -151,6 +193,47 @@ public class AdventureGameView extends GBFrame {
             model.setPlayerStatus("Item successfully dropped.");
         } else {
             model.setPlayerStatus("You are not holding an item in that hand.");
+        }
+    }
+    
+    /**
+     * Save current game model to file
+     */
+    public void saveGame(){
+        String saveName = System.getProperty("user.dir")+ "\\save" 
+                + JOptionPane.showInputDialog(null, 
+                "Choose a save number.");
+        
+        ObjectOutputStream saving;
+        try {
+            saving = new ObjectOutputStream(new FileOutputStream(saveName));
+            saving.writeObject(model);
+            saving.flush();
+            saving.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        model.setPlayerStatus("Saved game.");
+    }
+    
+    /**
+     * Load game model from user-specified file
+     */
+    public void loadGame(){
+        String saveName = System.getProperty("user.dir")+ "\\save" 
+                + JOptionPane.showInputDialog(null, 
+                "Choose a save number to load.");
+        
+        ObjectInputStream loading;
+        try {
+            loading = new ObjectInputStream(new FileInputStream(saveName));
+            model = (AdventureGameModelAbstractFactory) loading.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

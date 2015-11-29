@@ -9,6 +9,8 @@
 
 package esof322.a4;
 
+import java.io.Serializable;
+
 /**
  * Adventure Game Program Code Copyright (c) 1999 James M. Bieman
  *
@@ -19,7 +21,7 @@ package esof322.a4;
  *
  */
 // class Item
-public class Item {
+public class Item implements Serializable{
     private String description;
 
     public void setDesc(String d) {

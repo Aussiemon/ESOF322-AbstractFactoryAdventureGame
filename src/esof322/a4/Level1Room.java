@@ -1,12 +1,10 @@
 /**
- * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
- * Kay Spokas, Matt Rohrlach 
+ * @author Matt Rohrlach 
  */
 
 /**
  * @SummaryOfChanges
- *  added method call to set player status when room is successfully entered
- *  in enter method
+ *  
  */
 
 
@@ -27,11 +25,6 @@ package esof322.a4;
 **/
 
 // class Level1Room
-
-
-import java.util.ArrayList;
-import java.util.ListIterator;
-
 
 public class Level1Room extends Room{
     

@@ -3,7 +3,7 @@
  */
 package esof322.a4;
 
-import esof322.a4.Level0Door;
+import esof322.a4.Door;
 import esof322.a4.Room;
 import esof322.a4.Key;
 import esof322.a4.Player;
@@ -19,13 +19,13 @@ import static org.junit.Assert.*;
  * @author Matthew Rohrlach
  * @date 10/26/15
  */
-public class Level1DoorTest {
-    Level1Door dTest;
+public class DoorTest {
+    Door dTest;
     Player pTest;
     Room rTestOut, rTestIn, rTest;
     Key kTest;
     
-    public Level1DoorTest() {
+    public DoorTest() {
     }
     
     @BeforeClass
@@ -45,7 +45,7 @@ public class Level1DoorTest {
         
         kTest = new Key();
         
-        dTest = new Level1Door(rTestOut, rTestIn, kTest);
+        dTest = new Door(rTestOut, rTestIn, kTest);
         
         pTest = new Player();
     }

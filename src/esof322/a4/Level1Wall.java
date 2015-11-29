@@ -1,11 +1,9 @@
 /**
- * @author Andrew Jenkins, Stephanie McLaren, David Schwehr,
- * Kay Spokas, Matt Rohrlach 
+ * @author Matt Rohrlach 
  */
 
 /**@SummaryOfChanges
- *  Edited output for when player walks into wall
- *  Added method call to set player status when player walks into wall
+ * 
  */
 
 
