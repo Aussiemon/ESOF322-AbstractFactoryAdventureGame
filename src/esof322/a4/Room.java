@@ -42,18 +42,22 @@ public class Room implements CaveSite {
   private ArrayList<Item> contents = new ArrayList<Item>();
 
   Room() {
-    side[0] = new Level0Wall();
-    side[1] = new Level0Wall();
-    side[2] = new Level0Wall();
-    side[3] = new Level0Wall();
-    side[4] = new Level0Wall();
-    side[5] = new Level0Wall();
+    side[0] = new Wall();
+    side[1] = new Wall();
+    side[2] = new Wall();
+    side[3] = new Wall();
+    side[4] = new Wall();
+    side[5] = new Wall();
     }
 
   public void setDesc(String d){
     description = d;
     }
 
+  public CaveSite[] getSideArray(){
+      return side;
+  }
+  
   public void setSide(int direction, CaveSite m){
    side[direction] = m;
    }

@@ -66,7 +66,7 @@ public class AdventureGameView extends GBFrame {
     JButton upButton = addButton("Up", 15, 2, 1, 1);
     JButton downButton = addButton("Down", 18, 2, 1, 1);
 
-    AdventureGameModelAbstractFactory model;
+    AdventureGameModelFacade model;
     int difficulty = Integer.parseInt((String) JOptionPane.showInputDialog(
                 null,
                 "Choose an initial difficulty:",
@@ -81,7 +81,7 @@ public class AdventureGameView extends GBFrame {
     // Constructor-----------------------------------------------
     public AdventureGameView() {
         setTitle("Adventure Game");
-        model = new AdventureGameModelAbstractFactory(difficulty);
+        model = new AdventureGameModelFacade(difficulty);
         viewArea.setEditable(false);
         carryingArea.setEditable(false);
         displayCurrentInfo();
@@ -121,7 +121,7 @@ public class AdventureGameView extends GBFrame {
                 
                 model.setPlayerStatus("Difficulty set to " + difficulty + ".");
         } else if (buttonObj == restartButton){
-            model = new AdventureGameModelAbstractFactory(difficulty);
+            model = new AdventureGameModelFacade(difficulty);
             displayCurrentInfo();
         }  else if (buttonObj == grabButton) {
             grab();
@@ -225,7 +225,7 @@ public class AdventureGameView extends GBFrame {
         ObjectInputStream loading;
         try {
             loading = new ObjectInputStream(new FileInputStream(saveName));
-            model = (AdventureGameModelAbstractFactory) loading.readObject();
+            model = (AdventureGameModelFacade) loading.readObject();
             loading.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Error loading save. Does not exist?");

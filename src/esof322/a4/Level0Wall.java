@@ -20,6 +20,6 @@ package esof322.a4;
  *
  *
  */
-public class Level0Wall extends Wall {
+public class Level0Wall extends Wall{
     
 }

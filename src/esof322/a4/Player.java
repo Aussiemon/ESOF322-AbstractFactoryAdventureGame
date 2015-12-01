@@ -5,7 +5,7 @@
 
 /**
  * @SummaryOfChanges
- *  Added String variable to account for player status
+ *  Added starting location attribute to player with get method
  */
 package esof322.a4;
 
@@ -21,6 +21,9 @@ import java.io.Serializable;
  *
  */
 public class Player implements Serializable{
+    
+    private Room startLoc;
+    private boolean setStartLoc = false;
 
     private Room myLoc;
 
@@ -32,6 +35,10 @@ public class Player implements Serializable{
 
     public void setRoom(Room r) {
         myLoc = r;
+        if(!setStartLoc){
+            startLoc = myLoc;
+            setStartLoc = true;
+        }
     }
 
     public String look() {
@@ -123,6 +130,10 @@ public class Player implements Serializable{
 
     public int numItemsCarried() {
         return itemCount;
+    }
+    
+    public Room getStartLoc(){
+        return startLoc;
     }
 
 }

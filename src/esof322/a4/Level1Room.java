@@ -27,5 +27,14 @@ package esof322.a4;
 // class Level1Room
 
 public class Level1Room extends Room{
+    private CaveSite[] side1 = this.getSideArray();
     
+    Level1Room() {
+    side1[0] = new Level1Wall();
+    side1[1] = new Level1Wall();
+    side1[2] = new Level1Wall();
+    side1[3] = new Level1Wall();
+    side1[4] = new Level1Wall();
+    side1[5] = new Level1Wall();
+    }
 }
