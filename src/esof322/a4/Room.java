@@ -79,7 +79,7 @@ public class Room implements CaveSite {
 
   public void enter(Player p) {
    p.setLoc(this); 
-   p.setCurrentStatus("You successfully enter the room");
+   p.setCurrentStatus("You proceed through the dark.");
   }
 
   public void exit(int direction, Player p){

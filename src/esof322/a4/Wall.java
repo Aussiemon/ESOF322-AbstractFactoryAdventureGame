@@ -23,10 +23,10 @@ package esof322.a4;
  *
  */
 public class Wall implements CaveSite {
-    String description = "Ow! My face.";
+    String description = "You smack your stupid face on well-described stone.";
     
     public void enter(Player p) {
         p.setCurrentStatus(description);
-        System.out.println("Ouch! That hurts.\n");
+        System.out.println("Ouch! That hurt.\n");
     }   
 }

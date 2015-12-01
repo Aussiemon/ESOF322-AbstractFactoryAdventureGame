@@ -23,8 +23,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AdventureGameView extends GBFrame {
 
@@ -177,8 +175,8 @@ public class AdventureGameView extends GBFrame {
     private void drop() {
         String s = (String) JOptionPane.showInputDialog(
                 null,
-                "Drop item 1 or item 2?\nView carrying items status for a "
-                + "list of current items held",
+                "Drop item 1 or item 2?\nView carried items status for a "
+                + "list of current items held.",
                 "Customized Dialog",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
@@ -211,7 +209,7 @@ public class AdventureGameView extends GBFrame {
             saving.flush();
             saving.close();
         } catch (IOException ex) {
-            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error saving game. No write permission?");
         }
         model.setPlayerStatus("Saved game.");
     }
@@ -228,13 +226,14 @@ public class AdventureGameView extends GBFrame {
         try {
             loading = new ObjectInputStream(new FileInputStream(saveName));
             model = (AdventureGameModelAbstractFactory) loading.readObject();
+            loading.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdventureGameView.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error loading save. Does not exist?");
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("Error loading save. No read permission? Disk error?");
         }
+        
+        difficulty = model.getDifficulty();
     }
 
     /**

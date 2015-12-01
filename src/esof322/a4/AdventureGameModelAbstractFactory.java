@@ -53,18 +53,17 @@ public class AdventureGameModelAbstractFactory implements Serializable{
         // The outside: 
         Level0Room outside = new Level0Room();
         outside.setDesc(
-                "You are standing at the edge of a desert cave. The stars\n"
-                + "illuminate the sands around you but shed no light\n"
+                "DIFFICULTY 0: You are standing in the foyer of a desert tower.\n"
+                + "The stars illuminate the sands around you but shed no light\n"
                 + "past the mouth of the abyss at your feet. Something \n"
-                + "compels you to descend, and will smack your face\n"
-                + "if you do not. (outside).");
+                + "compels you to descend (outside).");
 
         // Level0Room 1:
         Level0Room r1 = new Level0Room();
         r1.setDesc(
                 "The cave exit shines brightly above you, but all else is\n"
                 + " dark, and you are glad to have your torch. It reveals a narrow,\n"
-                + "dank passage to the east (r1).");
+                + "dark passage to the east (r1).");
 
         // Connect the outside to Level0Room 1:
         outside.setSide(5, r1);
@@ -189,18 +188,17 @@ public class AdventureGameModelAbstractFactory implements Serializable{
         // The outside: 
         Level1Room outside = new Level1Room();
         outside.setDesc(
-                "You are standing at the edge of a desert cave. The stars\n"
-                + "illuminate the sands around you but shed no light\n"
+                "DIFFICULTY 1: You are standing in the foyer of a desert tower. \n"
+                + "The stars illuminate the sands around you but shed no light\n"
                 + "past the mouth of the abyss at your feet. Something \n"
-                + "compels you to descend, and will smack your face\n"
-                + "if you do not. (outside).");
+                + "compels you to descend (outside).");
 
         // Level1Room 1:
         Level1Room r1 = new Level1Room();
         r1.setDesc(
                 "The cave exit shines brightly above you, but all else is\n"
                 + " dark, and you are glad to have your torch. It reveals a narrow,\n"
-                + "dank passage to the east (r1).");
+                + "dark passage to the east (r1).");
 
         // Connect the outside to Level1Room 1:
         outside.setSide(5, r1);
@@ -420,8 +418,8 @@ public class AdventureGameModelAbstractFactory implements Serializable{
      *
      * @return Current room
      */
-    public Level0Room getCurrentRoom() {
-        return (Level0Room) thePlayer.getLoc();
+    public Room getCurrentRoom() {
+        return thePlayer.getLoc();
     }
 
     public ArrayList<Room> getRoomList(){
