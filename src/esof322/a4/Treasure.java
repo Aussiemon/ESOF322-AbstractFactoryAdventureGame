@@ -23,4 +23,22 @@ package esof322.a4;
 // class Treasure
 
 public class Treasure extends Item {
+    boolean fake = false;
+    
+    public Treasure(){
+        //Regular treasure
+    }
+    public Treasure(boolean inFake){
+        if(inFake){
+            fake = true;
+        }
+    }
+    @Override
+    public boolean isFake(){
+        if (fake == true) {
+            return true;
+        }
+        else return false;
+    }
+    
 }

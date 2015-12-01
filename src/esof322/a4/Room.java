@@ -79,7 +79,10 @@ public class Room implements CaveSite {
    contentsArray = contents.toArray(contentsArray);
    return contentsArray;
   }
-
+  
+  public ArrayList<Item> getRoomContentsList(){
+      return contents;
+  }
 
   public void enter(Player p) {
    p.setLoc(this); 
@@ -100,5 +103,16 @@ public class Room implements CaveSite {
      return description + '\n' + '\n' +
      "Room Contents: " + contentString + '\n';
    }
-
+  
+    //Do-nothing methods to override in Level1Room
+    public boolean itemThief(){
+        return false;
+    }
+    
+    public String getThiefStatus(){
+        return "";
+    }
+    
+    public void resetItemThief(){
+    }
 }

@@ -31,4 +31,8 @@ public class Item implements Serializable{
     public String getDesc() {
         return description;
     }
+    
+    public boolean isFake(){
+        return false;
+    }
 }

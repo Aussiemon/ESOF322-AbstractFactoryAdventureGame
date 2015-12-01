@@ -10,6 +10,7 @@
 package esof322.a4;
 
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  * Adventure Game Program Code Copyright (c) 1999 James M. Bieman
@@ -54,6 +55,13 @@ public class Player implements Serializable{
             myThings[itemCount] = i;
             itemCount++;
             myLoc.removeItem(i);
+            //Items were just stolen (fake gold bars)
+            if(myLoc.itemThief()){
+                itemCount = 0;
+                clearMyThings();
+                JOptionPane.showMessageDialog(null, myLoc.getThiefStatus());
+                myLoc.resetItemThief();
+            }
         }
     }
 
@@ -134,6 +142,10 @@ public class Player implements Serializable{
     
     public Room getStartLoc(){
         return startLoc;
+    }
+    
+    public void clearMyThings(){
+        myThings = new Item[2];
     }
 
 }
